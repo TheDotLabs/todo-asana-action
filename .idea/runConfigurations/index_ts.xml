@@ -1,0 +1,13 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="index.ts" type="TypeScriptProgramRunner" factoryName="TypeScript" nameIsGenerated="true">
+    <module name="todo-asana-action" />
+    <option name="interpreterRef" value="project" />
+    <option name="interpreterOptions" value="" />
+    <option name="workingDirectory" value="$PROJECT_DIR$" />
+    <option name="tsconfigFile" value="$PROJECT_DIR$/tsconfig.json" />
+    <option name="extraTypeScriptOptions" value="" />
+    <option name="scriptName" value="$PROJECT_DIR$/src/index.ts" />
+    <option name="programParameters" value="" />
+    <method v="2" />
+  </configuration>
+</component>

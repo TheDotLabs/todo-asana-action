@@ -1,0 +1,12 @@
+name: 'TODO Asana Action'
+description: 'Create Asana Task from TODOs'
+inputs:
+  asana-token:
+    description: 'Asana Personal Access Token.'
+    required: true
+branding:
+  icon: 'list'
+  color: 'blue'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
