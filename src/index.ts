@@ -1,4 +1,4 @@
-import core from "@actions/core";
+const core = require("@actions/core");
 import {Repository} from 'nodegit';
 import {parseContent} from "./utils/utils";
 import {createTask} from "./asana";
@@ -12,11 +12,12 @@ async function run() {
     const rawProjectIds = core.getInput("project-ids");
     const projectIds = rawProjectIds ? JSON.parse(rawProjectIds) : [];
     const followersIds: string[] = [];
+    const workspaceId = core.getInput("workspace-id");
 
     const repo = await Repository.open("../../StudioProjects/fa_flutter_mt")
 
-    const from = await repo.getCommit('848816c7a5370b161b66680db1a0a075ca5da214');
-    const diffs = await from.getDiff();
+    const commit = await repo.getHeadCommit();
+    const diffs = await commit.getDiff();
     for (const value of diffs) {
       const patches = await value.patches();
       for (const patch of patches) {
@@ -26,7 +27,7 @@ async function run() {
           for (const line of lines) {
             parseContent(line.content(), async (username: string, task: string) => {
               const userId = getAsanaUserId(username);
-              await createTask(userId, task, asanaToken, projectIds, followersIds);
+              await createTask(userId, task, asanaToken, projectIds, followersIds, workspaceId);
             });
           }
         }
@@ -45,4 +46,4 @@ async function run() {
   }
 }
 
-run().catch(error => core.setFailed("Workflow failed! " + error.message));
+run().catch(error => core.setFailed("Workflow failed! " + error));

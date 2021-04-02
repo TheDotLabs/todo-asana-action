@@ -35,25 +35,93 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __importDefault(require("@actions/core"));
-var github_1 = __importDefault(require("@actions/github"));
+var core = require("@actions/core");
+var nodegit_1 = require("nodegit");
+var utils_1 = require("./utils/utils");
+var asana_1 = require("./asana");
+var asana_users_utils_1 = require("./utils/asana_users_utils");
 function run() {
     return __awaiter(this, void 0, void 0, function () {
-        var nameToGreet, time, payload;
-        return __generator(this, function (_a) {
-            console.log("Avc");
-            nameToGreet = core_1.default.getInput('who-to-greet');
-            console.log("Hello " + nameToGreet + "!");
-            time = (new Date()).toTimeString();
-            core_1.default.setOutput("time", time);
-            payload = JSON.stringify(github_1.default.context.payload, undefined, 2);
-            console.log("The event payload: " + payload);
-            return [2 /*return*/];
+        var asanaToken_1, rawProjectIds, projectIds_1, followersIds_1, workspaceId_1, repo, commit, diffs, _i, diffs_1, value, patches, _a, patches_1, patch, hunks, _b, hunks_1, hunk, lines, _c, lines_1, line, e_1;
+        var _this = this;
+        return __generator(this, function (_d) {
+            switch (_d.label) {
+                case 0:
+                    _d.trys.push([0, 14, , 15]);
+                    core.info("Init...");
+                    asanaToken_1 = core.getInput("asana-token");
+                    rawProjectIds = core.getInput("project-ids");
+                    projectIds_1 = rawProjectIds ? JSON.parse(rawProjectIds) : [];
+                    followersIds_1 = [];
+                    workspaceId_1 = core.getInput("workspace-id");
+                    return [4 /*yield*/, nodegit_1.Repository.open("../../StudioProjects/fa_flutter_mt")];
+                case 1:
+                    repo = _d.sent();
+                    return [4 /*yield*/, repo.getHeadCommit()];
+                case 2:
+                    commit = _d.sent();
+                    return [4 /*yield*/, commit.getDiff()];
+                case 3:
+                    diffs = _d.sent();
+                    _i = 0, diffs_1 = diffs;
+                    _d.label = 4;
+                case 4:
+                    if (!(_i < diffs_1.length)) return [3 /*break*/, 13];
+                    value = diffs_1[_i];
+                    return [4 /*yield*/, value.patches()];
+                case 5:
+                    patches = _d.sent();
+                    _a = 0, patches_1 = patches;
+                    _d.label = 6;
+                case 6:
+                    if (!(_a < patches_1.length)) return [3 /*break*/, 12];
+                    patch = patches_1[_a];
+                    return [4 /*yield*/, patch.hunks()];
+                case 7:
+                    hunks = _d.sent();
+                    _b = 0, hunks_1 = hunks;
+                    _d.label = 8;
+                case 8:
+                    if (!(_b < hunks_1.length)) return [3 /*break*/, 11];
+                    hunk = hunks_1[_b];
+                    return [4 /*yield*/, hunk.lines()];
+                case 9:
+                    lines = _d.sent();
+                    for (_c = 0, lines_1 = lines; _c < lines_1.length; _c++) {
+                        line = lines_1[_c];
+                        utils_1.parseContent(line.content(), function (username, task) { return __awaiter(_this, void 0, void 0, function () {
+                            var userId;
+                            return __generator(this, function (_a) {
+                                switch (_a.label) {
+                                    case 0:
+                                        userId = asana_users_utils_1.getAsanaUserId(username);
+                                        return [4 /*yield*/, asana_1.createTask(userId, task, asanaToken_1, projectIds_1, followersIds_1, workspaceId_1)];
+                                    case 1:
+                                        _a.sent();
+                                        return [2 /*return*/];
+                                }
+                            });
+                        }); });
+                    }
+                    _d.label = 10;
+                case 10:
+                    _b++;
+                    return [3 /*break*/, 8];
+                case 11:
+                    _a++;
+                    return [3 /*break*/, 6];
+                case 12:
+                    _i++;
+                    return [3 /*break*/, 4];
+                case 13: return [3 /*break*/, 15];
+                case 14:
+                    e_1 = _d.sent();
+                    core.error(e_1);
+                    return [3 /*break*/, 15];
+                case 15: return [2 /*return*/];
+            }
         });
     });
 }
-run().catch(function (error) { return core_1.default.setFailed("Workflow failed! " + error.message); });
+run().catch(function (error) { return core.setFailed("Workflow failed! " + error); });

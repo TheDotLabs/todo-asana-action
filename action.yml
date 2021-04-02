@@ -7,6 +7,9 @@ inputs:
   project-ids:
     description: 'List of projects where task needs to be added'
     required: true
+  workspace-id:
+    description: 'Workspace id'
+    required: true
 branding:
   icon: 'list'
   color: 'blue'
