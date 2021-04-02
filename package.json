@@ -11,7 +11,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/asana": "^0.18.1",
     "@types/node": "^14.14.37",
+    "@types/nodegit": "^0.26.15",
     "@vercel/ncc": "^0.27.0",
     "prettier": "^2.2.1",
     "ts-node": "^9.1.1",
@@ -19,6 +21,8 @@
   },
   "dependencies": {
     "@actions/core": "^1.2.6",
-    "@actions/github": "^4.0.0"
+    "@actions/github": "^4.0.0",
+    "asana": "^0.18.5",
+    "nodegit": "^0.27.0"
   }
 }
