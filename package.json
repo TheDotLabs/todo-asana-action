@@ -1,15 +1,15 @@
 {
   "name": "todo-asana-action",
   "version": "1.0.0",
-  "description": "",
+  "description": "Create Asana task from TODOs",
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Ayush P Gupta <ayushpguptaapg@gmail.com>",
+  "license": "MIT",
   "devDependencies": {
     "@types/asana": "^0.18.1",
     "@types/node": "^14.14.37",

@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var asana_1 = require("./asana");
-var asana_users_utils_1 = require("./utils/asana_users_utils");
 try {
     var username = "apgapg";
     var asanaToken = "---";
@@ -9,7 +8,13 @@ try {
     var followersIds = [];
     var task = "[TODO] This is test task from TODO";
     var workspaceId = "34125054317482";
-    var userId = asana_users_utils_1.getAsanaUserId(username);
+    var userMapping = {
+        "apgapg": "712057959076542",
+        "someshubham": "1127520825602495",
+        "samvitjain": "1190264423420113",
+        "Aashishm178": "1200109906013623"
+    };
+    var userId = userMapping[username];
     asana_1.createTask(userId, task, asanaToken, projectIds, followersIds, workspaceId).then(function (r) { return console.log(r); }).catch(function (e) { return console.error(e); });
 }
 catch (e) {

@@ -40,22 +40,24 @@ var core = require("@actions/core");
 var nodegit_1 = require("nodegit");
 var utils_1 = require("./utils/utils");
 var asana_1 = require("./asana");
-var asana_users_utils_1 = require("./utils/asana_users_utils");
 function run() {
     return __awaiter(this, void 0, void 0, function () {
-        var asanaToken_1, rawProjectIds, projectIds_1, followersIds_1, workspaceId_1, repo, commit, diffs, _i, diffs_1, value, patches, _a, patches_1, patch, hunks, _b, hunks_1, hunk, lines, _c, lines_1, line, e_1;
+        var asanaToken_1, rawProjectIds, workspaceId_1, rawFollowerIds, rawUserMapping, projectIds_1, followerIds_1, userMapping_1, repo, commit, diffs, _i, diffs_1, value, patches, _a, patches_1, patch, hunks, _b, hunks_1, hunk, lines, _c, lines_1, line, e_1;
         var _this = this;
         return __generator(this, function (_d) {
             switch (_d.label) {
                 case 0:
                     _d.trys.push([0, 14, , 15]);
-                    core.info("Init...");
+                    core.info("Init todo-asana-action...");
                     asanaToken_1 = core.getInput("asana-token");
-                    rawProjectIds = core.getInput("project-ids");
+                    rawProjectIds = core.getInput("projects");
+                    workspaceId_1 = core.getInput("workspace");
+                    rawFollowerIds = core.getInput("followers");
+                    rawUserMapping = core.getInput("user-mapping");
                     projectIds_1 = rawProjectIds ? JSON.parse(rawProjectIds) : [];
-                    followersIds_1 = [];
-                    workspaceId_1 = core.getInput("workspace-id");
-                    return [4 /*yield*/, nodegit_1.Repository.open("../../StudioProjects/fa_flutter_mt")];
+                    followerIds_1 = rawFollowerIds ? JSON.parse(rawFollowerIds) : [];
+                    userMapping_1 = rawUserMapping ? JSON.parse(rawUserMapping) : {};
+                    return [4 /*yield*/, nodegit_1.Repository.open("./")];
                 case 1:
                     repo = _d.sent();
                     return [4 /*yield*/, repo.getHeadCommit()];
@@ -95,8 +97,8 @@ function run() {
                             return __generator(this, function (_a) {
                                 switch (_a.label) {
                                     case 0:
-                                        userId = asana_users_utils_1.getAsanaUserId(username);
-                                        return [4 /*yield*/, asana_1.createTask(userId, task, asanaToken_1, projectIds_1, followersIds_1, workspaceId_1)];
+                                        userId = userMapping_1[username];
+                                        return [4 /*yield*/, asana_1.createTask(userId, task, asanaToken_1, projectIds_1, followerIds_1, workspaceId_1)];
                                     case 1:
                                         _a.sent();
                                         return [2 /*return*/];

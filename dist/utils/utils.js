@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.parseContent = void 0;
 function parseContent(content, createTask) {
     var _a, _b, _c, _d;
-    createTask("a", "z");
     var match;
     var regExp = /TODO\((?<username>\w+)\): (?<task>\w+)/g;
     while ((match = regExp.exec(content)) !== null) {
