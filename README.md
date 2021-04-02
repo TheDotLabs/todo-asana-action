@@ -1,4 +1,4 @@
-# todo-asana-action
+# todo-asana-action ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/apgapg/todo-asana-action) ![GitHub](https://img.shields.io/github/license/apgapg/todo-asana-action) ![GitHub Repo stars](https://img.shields.io/github/stars/apgapg/todo-asana-action?style=social)
 
 <img src="https://user-images.githubusercontent.com/13887407/112085815-2e77af80-8bb1-11eb-9100-973cd024f9d5.png"  height = "100" alt="Asana">
 
