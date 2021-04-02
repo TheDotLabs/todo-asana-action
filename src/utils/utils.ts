@@ -1,5 +1,4 @@
 export function parseContent(content: string, createTask: (username: string, task: string) => void) {
-  createTask("a", "z");
   let match;
   const regExp: RegExp = /TODO\((?<username>\w+)\): (?<task>\w+)/g;
   while ((match = regExp.exec(content)) !== null) {

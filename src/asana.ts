@@ -1,7 +1,7 @@
 import asana from "asana";
 
 export async function createTask(userId: string, task: string, token: string, projectIds: string[], followersIds: string[], workspaceId: string) {
-  console.log(`Creating Asana Task: ${userId}: ${task}`);
+  console.log(`Creating Asana Task: ${ userId }: ${ task }`);
 
   if (!workspaceId) {
     console.error("Workspace cannot be null/empty!");

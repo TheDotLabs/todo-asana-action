@@ -15,6 +15,8 @@ Automatically creates Asana task from TODOs in your code.
 uses: apgapg/todo-asana-action@--latest--
 with:
   asana-token: 'Your PAT'
-  project-ids: '["1199123288499074"]'
-  workspace-id: '34125054317482'
+  projects: '["1199123288499074"]'
+  workspace: '34125054317482',
+  followers: '["712057959076542","1127520825602495"]', # Optional
+  user-mapping: '{"apgapg":"712057959076542","amitkma":"1127520825602495}' # Optional
 ```

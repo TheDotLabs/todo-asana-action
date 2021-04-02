@@ -1,20 +1,23 @@
 const core = require("@actions/core");
-import {Repository} from 'nodegit';
-import {parseContent} from "./utils/utils";
-import {createTask} from "./asana";
-import {getAsanaUserId} from "./utils/asana_users_utils";
+import { Repository } from 'nodegit';
+import { parseContent } from "./utils/utils";
+import { createTask } from "./asana";
 
 async function run() {
   try {
-    core.info("Init...");
+    core.info("Init todo-asana-action...");
 
     const asanaToken = core.getInput("asana-token");
-    const rawProjectIds = core.getInput("project-ids");
-    const projectIds = rawProjectIds ? JSON.parse(rawProjectIds) : [];
-    const followersIds: string[] = [];
-    const workspaceId = core.getInput("workspace-id");
+    const rawProjectIds = core.getInput("projects");
+    const workspaceId = core.getInput("workspace");
+    const rawFollowerIds = core.getInput("followers");
+    const rawUserMapping = core.getInput("user-mapping");
 
-    const repo = await Repository.open("../../StudioProjects/fa_flutter_mt")
+    const projectIds = rawProjectIds ? JSON.parse(rawProjectIds) : [];
+    const followerIds = rawFollowerIds ? JSON.parse(rawFollowerIds) : [];
+    const userMapping = rawUserMapping ? JSON.parse(rawUserMapping) : {};
+
+    const repo = await Repository.open("./")
 
     const commit = await repo.getHeadCommit();
     const diffs = await commit.getDiff();
@@ -26,13 +29,14 @@ async function run() {
           const lines = await hunk.lines();
           for (const line of lines) {
             parseContent(line.content(), async (username: string, task: string) => {
-              const userId = getAsanaUserId(username);
-              await createTask(userId, task, asanaToken, projectIds, followersIds, workspaceId);
+              const userId = userMapping[username];
+              await createTask(userId, task, asanaToken, projectIds, followerIds, workspaceId);
             });
           }
         }
       }
     }
+
 
     // const nameToGreet = core.getInput('who-to-greet');
     // console.log(`Hello ${ nameToGreet }!`);

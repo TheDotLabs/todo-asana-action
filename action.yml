@@ -2,14 +2,20 @@ name: 'TODO Asana Action'
 description: 'Create Asana Task from TODOs'
 inputs:
   asana-token:
-    description: 'Asana Personal Access Token.'
+    description: 'Asana personal access token'
     required: true
-  project-ids:
-    description: 'List of projects where task needs to be added'
+  projects:
+    description: 'List of project id(s) where task needs to be added'
     required: true
-  workspace-id:
+  workspace:
     description: 'Workspace id'
     required: true
+  followers:
+    description: 'User id(s) of followers to be added to the task'
+    required: false
+  user-mapping:
+    description: 'Github to asana id of users'
+    required: false
 branding:
   icon: 'list'
   color: 'blue'
