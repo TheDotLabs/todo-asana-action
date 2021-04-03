@@ -1,7 +1,8 @@
 const core = require("@actions/core");
-import { Repository } from 'nodegit';
-import { parseContent } from "./utils/utils";
-import { createTask } from "./asana";
+// @ts-ignore
+import {Repository} from 'nodegit';
+import {parseContent} from "./utils/utils";
+import {createTask} from "./asana";
 
 async function run() {
   try {

@@ -37,6 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core = require("@actions/core");
+// @ts-ignore
 var nodegit_1 = require("nodegit");
 var utils_1 = require("./utils/utils");
 var asana_1 = require("./asana");
