@@ -1,8 +1,8 @@
-const core = require("@actions/core");
+import * as core from "@actions/core";
 // @ts-ignore
-import {Repository} from 'nodegit';
-import {parseContent} from "./utils/utils";
-import {createTask} from "./asana";
+import { Repository } from 'nodegit';
+import { parseContent } from "./utils/utils";
+import { createTask } from "./asana";
 
 async function run() {
   try {
@@ -18,7 +18,7 @@ async function run() {
     const followerIds = rawFollowerIds ? JSON.parse(rawFollowerIds) : [];
     const userMapping = rawUserMapping ? JSON.parse(rawUserMapping) : {};
 
-    const repo = await Repository.open("./")
+    const repo = await Repository.open(process.env.GITHUB_WORKSPACE ?? "./")
 
     const commit = await repo.getHeadCommit();
     const diffs = await commit.getDiff();
