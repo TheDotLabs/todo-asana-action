@@ -66,7 +66,7 @@ function run() {
         return __generator(this, function (_d) {
             switch (_d.label) {
                 case 0:
-                    _d.trys.push([0, 15, , 16]);
+                    _d.trys.push([0, 14, , 15]);
                     core.info("Init todo-asana-action...");
                     asanaToken_1 = core.getInput("asana-token");
                     rawProjectIds = core.getInput("projects");
@@ -79,38 +79,35 @@ function run() {
                     return [4 /*yield*/, nodegit_1.Repository.open("./")];
                 case 1:
                     repo = _d.sent();
-                    return [4 /*yield*/, repo.fetchAll()];
-                case 2:
-                    _d.sent();
                     return [4 /*yield*/, repo.getHeadCommit()];
-                case 3:
+                case 2:
                     commit = _d.sent();
                     return [4 /*yield*/, commit.getDiff()];
-                case 4:
+                case 3:
                     diffs = _d.sent();
                     _i = 0, diffs_1 = diffs;
-                    _d.label = 5;
-                case 5:
-                    if (!(_i < diffs_1.length)) return [3 /*break*/, 14];
+                    _d.label = 4;
+                case 4:
+                    if (!(_i < diffs_1.length)) return [3 /*break*/, 13];
                     value = diffs_1[_i];
                     return [4 /*yield*/, value.patches()];
-                case 6:
+                case 5:
                     patches = _d.sent();
                     _a = 0, patches_1 = patches;
-                    _d.label = 7;
-                case 7:
-                    if (!(_a < patches_1.length)) return [3 /*break*/, 13];
+                    _d.label = 6;
+                case 6:
+                    if (!(_a < patches_1.length)) return [3 /*break*/, 12];
                     patch = patches_1[_a];
                     return [4 /*yield*/, patch.hunks()];
-                case 8:
+                case 7:
                     hunks = _d.sent();
                     _b = 0, hunks_1 = hunks;
-                    _d.label = 9;
-                case 9:
-                    if (!(_b < hunks_1.length)) return [3 /*break*/, 12];
+                    _d.label = 8;
+                case 8:
+                    if (!(_b < hunks_1.length)) return [3 /*break*/, 11];
                     hunk = hunks_1[_b];
                     return [4 /*yield*/, hunk.lines()];
-                case 10:
+                case 9:
                     lines = _d.sent();
                     for (_c = 0, lines_1 = lines; _c < lines_1.length; _c++) {
                         line = lines_1[_c];
@@ -128,22 +125,22 @@ function run() {
                             });
                         }); });
                     }
-                    _d.label = 11;
-                case 11:
+                    _d.label = 10;
+                case 10:
                     _b++;
-                    return [3 /*break*/, 9];
-                case 12:
+                    return [3 /*break*/, 8];
+                case 11:
                     _a++;
-                    return [3 /*break*/, 7];
-                case 13:
+                    return [3 /*break*/, 6];
+                case 12:
                     _i++;
-                    return [3 /*break*/, 5];
-                case 14: return [3 /*break*/, 16];
-                case 15:
+                    return [3 /*break*/, 4];
+                case 13: return [3 /*break*/, 15];
+                case 14:
                     e_1 = _d.sent();
                     core.error(e_1);
-                    return [3 /*break*/, 16];
-                case 16: return [2 /*return*/];
+                    return [3 /*break*/, 15];
+                case 15: return [2 /*return*/];
             }
         });
     });
