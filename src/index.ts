@@ -1,8 +1,7 @@
 import * as core from "@actions/core";
-// @ts-ignore
-import { Repository } from 'nodegit';
 import { parseContent } from "./utils/utils";
 import { createTask } from "./asana";
+import { Repository } from "nodegit";
 
 async function run() {
   try {
@@ -22,6 +21,7 @@ async function run() {
 
     const commit = await repo.getHeadCommit();
     const diffs = await commit.getDiff();
+
     for (const value of diffs) {
       const patches = await value.patches();
       for (const patch of patches) {

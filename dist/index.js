@@ -56,10 +56,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core = __importStar(require("@actions/core"));
-// @ts-ignore
-var nodegit_1 = require("nodegit");
 var utils_1 = require("./utils/utils");
 var asana_1 = require("./asana");
+var nodegit_1 = require("nodegit");
 function run() {
     var _a;
     return __awaiter(this, void 0, void 0, function () {
