@@ -19,6 +19,8 @@ async function run() {
 
     const repo = await Repository.open("./");
 
+    await repo.fetchAll();
+
     const commit = await repo.getHeadCommit();
     const diffs = await commit.getDiff();
 
