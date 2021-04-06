@@ -1,6 +1,6 @@
 {
   "name": "todo-asana-action",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "Create Asana task from TODOs",
   "main": "dist/index.js",
   "scripts": {
