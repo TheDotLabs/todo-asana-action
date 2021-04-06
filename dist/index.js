@@ -1,4 +1,23 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -36,19 +55,20 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core = require("@actions/core");
+var core = __importStar(require("@actions/core"));
 // @ts-ignore
 var nodegit_1 = require("nodegit");
 var utils_1 = require("./utils/utils");
 var asana_1 = require("./asana");
 function run() {
+    var _a;
     return __awaiter(this, void 0, void 0, function () {
-        var asanaToken_1, rawProjectIds, workspaceId_1, rawFollowerIds, rawUserMapping, projectIds_1, followerIds_1, userMapping_1, repo, commit, diffs, _i, diffs_1, value, patches, _a, patches_1, patch, hunks, _b, hunks_1, hunk, lines, _c, lines_1, line, e_1;
+        var asanaToken_1, rawProjectIds, workspaceId_1, rawFollowerIds, rawUserMapping, projectIds_1, followerIds_1, userMapping_1, repo, commit, diffs, _i, diffs_1, value, patches, _b, patches_1, patch, hunks, _c, hunks_1, hunk, lines, _d, lines_1, line, e_1;
         var _this = this;
-        return __generator(this, function (_d) {
-            switch (_d.label) {
+        return __generator(this, function (_e) {
+            switch (_e.label) {
                 case 0:
-                    _d.trys.push([0, 14, , 15]);
+                    _e.trys.push([0, 14, , 15]);
                     core.info("Init todo-asana-action...");
                     asanaToken_1 = core.getInput("asana-token");
                     rawProjectIds = core.getInput("projects");
@@ -58,41 +78,41 @@ function run() {
                     projectIds_1 = rawProjectIds ? JSON.parse(rawProjectIds) : [];
                     followerIds_1 = rawFollowerIds ? JSON.parse(rawFollowerIds) : [];
                     userMapping_1 = rawUserMapping ? JSON.parse(rawUserMapping) : {};
-                    return [4 /*yield*/, nodegit_1.Repository.open("./")];
+                    return [4 /*yield*/, nodegit_1.Repository.open((_a = process.env.GITHUB_WORKSPACE) !== null && _a !== void 0 ? _a : "./")];
                 case 1:
-                    repo = _d.sent();
+                    repo = _e.sent();
                     return [4 /*yield*/, repo.getHeadCommit()];
                 case 2:
-                    commit = _d.sent();
+                    commit = _e.sent();
                     return [4 /*yield*/, commit.getDiff()];
                 case 3:
-                    diffs = _d.sent();
+                    diffs = _e.sent();
                     _i = 0, diffs_1 = diffs;
-                    _d.label = 4;
+                    _e.label = 4;
                 case 4:
                     if (!(_i < diffs_1.length)) return [3 /*break*/, 13];
                     value = diffs_1[_i];
                     return [4 /*yield*/, value.patches()];
                 case 5:
-                    patches = _d.sent();
-                    _a = 0, patches_1 = patches;
-                    _d.label = 6;
+                    patches = _e.sent();
+                    _b = 0, patches_1 = patches;
+                    _e.label = 6;
                 case 6:
-                    if (!(_a < patches_1.length)) return [3 /*break*/, 12];
-                    patch = patches_1[_a];
+                    if (!(_b < patches_1.length)) return [3 /*break*/, 12];
+                    patch = patches_1[_b];
                     return [4 /*yield*/, patch.hunks()];
                 case 7:
-                    hunks = _d.sent();
-                    _b = 0, hunks_1 = hunks;
-                    _d.label = 8;
+                    hunks = _e.sent();
+                    _c = 0, hunks_1 = hunks;
+                    _e.label = 8;
                 case 8:
-                    if (!(_b < hunks_1.length)) return [3 /*break*/, 11];
-                    hunk = hunks_1[_b];
+                    if (!(_c < hunks_1.length)) return [3 /*break*/, 11];
+                    hunk = hunks_1[_c];
                     return [4 /*yield*/, hunk.lines()];
                 case 9:
-                    lines = _d.sent();
-                    for (_c = 0, lines_1 = lines; _c < lines_1.length; _c++) {
-                        line = lines_1[_c];
+                    lines = _e.sent();
+                    for (_d = 0, lines_1 = lines; _d < lines_1.length; _d++) {
+                        line = lines_1[_d];
                         utils_1.parseContent(line.content(), function (username, task) { return __awaiter(_this, void 0, void 0, function () {
                             var userId;
                             return __generator(this, function (_a) {
@@ -107,19 +127,19 @@ function run() {
                             });
                         }); });
                     }
-                    _d.label = 10;
+                    _e.label = 10;
                 case 10:
-                    _b++;
+                    _c++;
                     return [3 /*break*/, 8];
                 case 11:
-                    _a++;
+                    _b++;
                     return [3 /*break*/, 6];
                 case 12:
                     _i++;
                     return [3 /*break*/, 4];
                 case 13: return [3 /*break*/, 15];
                 case 14:
-                    e_1 = _d.sent();
+                    e_1 = _e.sent();
                     core.error(e_1);
                     return [3 /*break*/, 15];
                 case 15: return [2 /*return*/];
