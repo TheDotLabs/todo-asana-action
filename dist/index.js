@@ -60,14 +60,13 @@ var utils_1 = require("./utils/utils");
 var asana_1 = require("./asana");
 var nodegit_1 = require("nodegit");
 function run() {
-    var _a;
     return __awaiter(this, void 0, void 0, function () {
-        var asanaToken_1, rawProjectIds, workspaceId_1, rawFollowerIds, rawUserMapping, projectIds_1, followerIds_1, userMapping_1, repo, commit, diffs, _i, diffs_1, value, patches, _b, patches_1, patch, hunks, _c, hunks_1, hunk, lines, _d, lines_1, line, e_1;
+        var asanaToken_1, rawProjectIds, workspaceId_1, rawFollowerIds, rawUserMapping, projectIds_1, followerIds_1, userMapping_1, repo, commit, diffs, _i, diffs_1, value, patches, _a, patches_1, patch, hunks, _b, hunks_1, hunk, lines, _c, lines_1, line, e_1;
         var _this = this;
-        return __generator(this, function (_e) {
-            switch (_e.label) {
+        return __generator(this, function (_d) {
+            switch (_d.label) {
                 case 0:
-                    _e.trys.push([0, 14, , 15]);
+                    _d.trys.push([0, 14, , 15]);
                     core.info("Init todo-asana-action...");
                     asanaToken_1 = core.getInput("asana-token");
                     rawProjectIds = core.getInput("projects");
@@ -77,41 +76,41 @@ function run() {
                     projectIds_1 = rawProjectIds ? JSON.parse(rawProjectIds) : [];
                     followerIds_1 = rawFollowerIds ? JSON.parse(rawFollowerIds) : [];
                     userMapping_1 = rawUserMapping ? JSON.parse(rawUserMapping) : {};
-                    return [4 /*yield*/, nodegit_1.Repository.open((_a = process.env.GITHUB_WORKSPACE) !== null && _a !== void 0 ? _a : "./")];
+                    return [4 /*yield*/, nodegit_1.Repository.open("./")];
                 case 1:
-                    repo = _e.sent();
+                    repo = _d.sent();
                     return [4 /*yield*/, repo.getHeadCommit()];
                 case 2:
-                    commit = _e.sent();
+                    commit = _d.sent();
                     return [4 /*yield*/, commit.getDiff()];
                 case 3:
-                    diffs = _e.sent();
+                    diffs = _d.sent();
                     _i = 0, diffs_1 = diffs;
-                    _e.label = 4;
+                    _d.label = 4;
                 case 4:
                     if (!(_i < diffs_1.length)) return [3 /*break*/, 13];
                     value = diffs_1[_i];
                     return [4 /*yield*/, value.patches()];
                 case 5:
-                    patches = _e.sent();
-                    _b = 0, patches_1 = patches;
-                    _e.label = 6;
+                    patches = _d.sent();
+                    _a = 0, patches_1 = patches;
+                    _d.label = 6;
                 case 6:
-                    if (!(_b < patches_1.length)) return [3 /*break*/, 12];
-                    patch = patches_1[_b];
+                    if (!(_a < patches_1.length)) return [3 /*break*/, 12];
+                    patch = patches_1[_a];
                     return [4 /*yield*/, patch.hunks()];
                 case 7:
-                    hunks = _e.sent();
-                    _c = 0, hunks_1 = hunks;
-                    _e.label = 8;
+                    hunks = _d.sent();
+                    _b = 0, hunks_1 = hunks;
+                    _d.label = 8;
                 case 8:
-                    if (!(_c < hunks_1.length)) return [3 /*break*/, 11];
-                    hunk = hunks_1[_c];
+                    if (!(_b < hunks_1.length)) return [3 /*break*/, 11];
+                    hunk = hunks_1[_b];
                     return [4 /*yield*/, hunk.lines()];
                 case 9:
-                    lines = _e.sent();
-                    for (_d = 0, lines_1 = lines; _d < lines_1.length; _d++) {
-                        line = lines_1[_d];
+                    lines = _d.sent();
+                    for (_c = 0, lines_1 = lines; _c < lines_1.length; _c++) {
+                        line = lines_1[_c];
                         utils_1.parseContent(line.content(), function (username, task) { return __awaiter(_this, void 0, void 0, function () {
                             var userId;
                             return __generator(this, function (_a) {
@@ -126,19 +125,19 @@ function run() {
                             });
                         }); });
                     }
-                    _e.label = 10;
+                    _d.label = 10;
                 case 10:
-                    _c++;
+                    _b++;
                     return [3 /*break*/, 8];
                 case 11:
-                    _b++;
+                    _a++;
                     return [3 /*break*/, 6];
                 case 12:
                     _i++;
                     return [3 /*break*/, 4];
                 case 13: return [3 /*break*/, 15];
                 case 14:
-                    e_1 = _e.sent();
+                    e_1 = _d.sent();
                     core.error(e_1);
                     return [3 /*break*/, 15];
                 case 15: return [2 /*return*/];

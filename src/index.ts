@@ -17,7 +17,7 @@ async function run() {
     const followerIds = rawFollowerIds ? JSON.parse(rawFollowerIds) : [];
     const userMapping = rawUserMapping ? JSON.parse(rawUserMapping) : {};
 
-    const repo = await Repository.open(process.env.GITHUB_WORKSPACE ?? "./")
+    const repo = await Repository.open("./");
 
     const commit = await repo.getHeadCommit();
     const diffs = await commit.getDiff();
