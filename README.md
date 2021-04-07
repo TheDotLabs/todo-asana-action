@@ -21,6 +21,28 @@ with:
   user-mapping: '{"apgapg":"712057959076542","amitkma":"1127520825602495}' # Optional
 ```
 
+## ❔ Inputs
+
+### `asana-token` (Required)
+
+Your personal access token of asana, you can find it in [asana docs](https://developers.asana.com/docs/#authentication-basics).
+
+### `projects` (Required)
+
+Array of project ids in which the task should be created
+
+### `workspace` (Required)
+
+Set your workspace id. Get it from here: [https://app.asana.com/api/1.0/workspaces](https://app.asana.com/api/1.0/workspaces)
+
+### `followers` (Optional)
+
+Provide the array of followers id you want to set in a task.
+
+### `user-mapping` (Optional)
+
+A map with **keys** representing **github username** and values representing corresponding **asana user id**
+
 ## 👍 Contribution
 
 1. Fork it
