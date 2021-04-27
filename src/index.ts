@@ -17,10 +17,13 @@ async function run() {
     const followerIds = rawFollowerIds ? JSON.parse(rawFollowerIds) : [];
     const userMapping = rawUserMapping ? JSON.parse(rawUserMapping) : {};
 
-    const repo = await Repository.open("./");
+    //const repo = await Repository.open("./");
+    const repo = await Repository.open("../../StudioProjects/fa_flutter_gt");
 
     const commit = await repo.getHeadCommit();
     const diffs = await commit.getDiff();
+
+    const todoList: CreateTask[] = [];
 
     for (const value of diffs) {
       const patches = await value.patches();
@@ -31,10 +34,18 @@ async function run() {
           for (const line of lines) {
             parseContent(line.content(), async (username: string, task: string) => {
               const userId = userMapping[username];
-              await createTask(userId, task, asanaToken, projectIds, followerIds, workspaceId);
+              todoList.push({ userId: userId, task: task });
             });
           }
         }
+      }
+
+      const filterTodoList = todoList.filter((value, i, self) => self.findIndex(t => (t.task === value.task)) === i);
+
+      console.log(`Found ${ filterTodoList.length } TODOs...`);
+
+      for (const todo of filterTodoList) {
+        await createTask(todo.userId, todo.task, asanaToken, projectIds, followerIds, workspaceId);
       }
     }
 
@@ -52,3 +63,8 @@ async function run() {
 }
 
 run().catch(error => core.setFailed("Workflow failed! " + error));
+
+interface CreateTask {
+  userId: string,
+  task: string
+}
