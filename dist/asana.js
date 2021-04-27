@@ -73,7 +73,11 @@ function createTask(userId, task, token, projectIds, followersIds, workspaceId) 
                         "projects": __spreadArray([], projectIds),
                         "workspace": workspaceId,
                     };
-                    client = asana_1.default.Client.create().useAccessToken(token);
+                    client = asana_1.default.Client.create({
+                        defaultHeaders: {
+                            "Asana-Enable": "new_user_task_lists"
+                        }
+                    }).useAccessToken(token);
                     return [4 /*yield*/, client.tasks.create(data)];
                 case 1:
                     result = _a.sent();

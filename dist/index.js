@@ -76,7 +76,7 @@ function run() {
                     projectIds = rawProjectIds ? JSON.parse(rawProjectIds) : [];
                     followerIds = rawFollowerIds ? JSON.parse(rawFollowerIds) : [];
                     userMapping_1 = rawUserMapping ? JSON.parse(rawUserMapping) : {};
-                    return [4 /*yield*/, nodegit_1.Repository.open("../../StudioProjects/fa_flutter_gt")];
+                    return [4 /*yield*/, nodegit_1.Repository.open("./")];
                 case 1:
                     repo = _e.sent();
                     return [4 /*yield*/, repo.getHeadCommit()];

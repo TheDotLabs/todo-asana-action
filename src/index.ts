@@ -17,8 +17,8 @@ async function run() {
     const followerIds = rawFollowerIds ? JSON.parse(rawFollowerIds) : [];
     const userMapping = rawUserMapping ? JSON.parse(rawUserMapping) : {};
 
-    //const repo = await Repository.open("./");
-    const repo = await Repository.open("../../StudioProjects/fa_flutter_gt");
+    const repo = await Repository.open("./");
+    //const repo = await Repository.open("../../StudioProjects/fa_flutter_gt");
 
     const commit = await repo.getHeadCommit();
     const diffs = await commit.getDiff();

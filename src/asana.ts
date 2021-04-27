@@ -32,7 +32,12 @@ export async function createTask(userId: string, task: string, token: string, pr
   };
 
 
-  const client = asana.Client.create().useAccessToken(token);
+  const client = asana.Client.create({
+    defaultHeaders: {
+      "Asana-Enable": "new_user_task_lists"
+    }
+  }).useAccessToken(token);
+
   const result = await client.tasks.create(data);
   console.log(result);
 }
